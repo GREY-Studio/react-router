@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+import './index.css';
 
 // Component imports
 import Home from "./components/Home";
@@ -12,15 +14,21 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div>
+        <Route render={({ location }) => console.log(location) || (
+          <div>
           <Navigation></Navigation>
-          <Switch>
-            <Route path="/" component={ Home } exact></Route>
-            <Route path="/how" component={ How }></Route>
-            <Route path="/partner" component={ Partner }></Route>
-            <Route component={ Error } exact></Route>
-          </Switch>
-        </div>
+          <TransitionGroup>
+            <CSSTransition key={ location.key } timeout={ 300 } classNames='fade'>
+              <Switch location={ location }>
+                <Route path="/" component={ Home } exact></Route>
+                <Route path="/how" component={ How }></Route>
+                <Route path="/partner" component={ Partner }></Route>
+                <Route component={ Error } exact></Route>
+              </Switch>
+            </CSSTransition>
+          </TransitionGroup>
+          </div>
+        )} />
       </BrowserRouter>
     );
   }
