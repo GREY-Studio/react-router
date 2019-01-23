@@ -1,9 +1,12 @@
 import React from "react";
 
-const Partner = () => {
+const Partner = ({ match }) => {
+
+    const { params } = match 
+
     return (
       <div style={styles.colour}>
-        <p>Partner!</p>
+        <p>Partner! Language: {params.lang} </p>
       </div>
     );
 };

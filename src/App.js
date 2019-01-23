@@ -15,19 +15,20 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Route render={({ location }) => console.log(location) || (
-          <div>
-          <Navigation></Navigation>
-          <TransitionGroup>
-            <CSSTransition key={ location.key } timeout={ 300 } classNames='fade'>
-              <Switch location={ location }>
-                <Route path="/" component={ Home } exact></Route>
-                <Route path="/how" component={ How }></Route>
-                <Route path="/partner" component={ Partner }></Route>
-                <Route component={ Error } exact></Route>
-              </Switch>
-            </CSSTransition>
-          </TransitionGroup>
-          </div>
+          <React.Fragment>
+            <Navigation></Navigation>
+            <TransitionGroup>
+              <CSSTransition key={ location.key } timeout={ 300 } classNames='fade'>
+                <Switch location={ location }>
+                  <Route path="/" component={ Home } exact></Route>
+                  <Route path="/how" component={ How }></Route>
+                  <Route path="/partner" component={ Partner }></Route>
+                  <Route path="/:lang/partner" component={ Partner }></Route>
+                  <Route component={ Error } exact></Route>
+                </Switch>
+              </CSSTransition>
+            </TransitionGroup>
+          </React.Fragment>
         )} />
       </BrowserRouter>
     );
